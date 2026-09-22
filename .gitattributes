@@ -1,0 +1,12 @@
+# CI test-routing registries are append-only line lists (one test name per line; '#' comments).
+# The orchestrator's OOM-promote loop auto-commits to these files on main CONSTANTLY, and any PR
+# that also edits them would then textually conflict on every such commit -> the branch goes DIRTY
+# -> agent_mode=resolve-conflicts spawns an agent that merges origin/main -> a new merge-commit head
+# that orphans the SHA-pinned approval and supersedes the in-flight CI wave (a head-churn source,
+# analysed 2026-08-20; see docs/design/ci-routing-policy.md + steering).
+#
+# Union-merge them so main's additions and the branch's additions BOTH survive with no conflict.
+# Safe here because the readers dedup to a frozenset (github_state.ci_{heavy,huge,mega}_tests) and
+# the append-writers dedup via a set, so a duplicated line is harmless. Do NOT union-merge code
+# (e.g. tests/mutations.py) — union on Python can produce syntactically/semantically broken files.
+tests/ci_*_tests.txt merge=union

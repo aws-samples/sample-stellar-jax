@@ -1,0 +1,4 @@
+jax==0.10.2
+jaxlib==0.10.2
+numpy>=1.24
+matplotlib>=3.7

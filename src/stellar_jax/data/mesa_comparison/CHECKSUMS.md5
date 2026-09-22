@@ -1,0 +1,58 @@
+# MESA reference-data checksum manifest
+# '*.FGONG.gz' -> md5 of the DECOMPRESSED content (stable regardless of gzip mtime).
+# all other files -> md5 of the committed file.
+
+d3bb9731b84a1d7e6219ea25a2a058cc  profiles/1.0Msun/midMS.FGONG.gz  [decompressed]
+9a29346c355a11990ebaaa1c2fc535cc  profiles/1.0Msun/SGB.FGONG.gz  [decompressed]
+14ddf688320026cb8d3492e489e5e24b  profiles/1.0Msun/TAMS.FGONG.gz  [decompressed]
+b4d65cc6be4ea5670bf347a44adb5483  profiles/1.0Msun/Xc0.10.FGONG.gz  [decompressed]
+f4387305af73c3599a39c30b390f0f47  profiles/1.0Msun/Xc0.20.FGONG.gz  [decompressed]
+3608e40d5c5c6ace317d83cdd4224e55  profiles/1.0Msun/Xc0.30.FGONG.gz  [decompressed]
+22c05030a64d1c7d823ef9a542cd1214  profiles/1.0Msun/Xc0.40.FGONG.gz  [decompressed]
+0a3a4db3354f8e15fdb75c97d5a07282  profiles/1.0Msun/Xc0.60.FGONG.gz  [decompressed]
+ee93e24c7923fe6454ab106037da34e4  profiles/1.0Msun/zams.FGONG.gz  [decompressed]
+6b2ad14430fab6e2e65b9017179ba768  profiles/1.2Msun/midMS.FGONG.gz  [decompressed]
+f7fe482ab8663da2fafe0dffa2f769c5  profiles/1.2Msun/SGB.FGONG.gz  [decompressed]
+a50077d2550ec65e28349e33bd90759f  profiles/1.2Msun/TAMS.FGONG.gz  [decompressed]
+73ef172489e9c2b2cbf2421ad8771f9c  profiles/1.2Msun/Xc0.10.FGONG.gz  [decompressed]
+db7c9ef78a1ae9a35c7cb5f32c044e69  profiles/1.2Msun/Xc0.20.FGONG.gz  [decompressed]
+0764ffd61954f5c0570c768429bc82f6  profiles/1.2Msun/Xc0.30.FGONG.gz  [decompressed]
+d425abecd82ed5b450379f7a290f81ff  profiles/1.2Msun/Xc0.40.FGONG.gz  [decompressed]
+bdc402fea1c2a748af54b6506fa8afec  profiles/1.2Msun/Xc0.60.FGONG.gz  [decompressed]
+4252b8b38430d3cecd06932fed2e72bf  profiles/1.2Msun/zams.FGONG.gz  [decompressed]
+b3244cb14d7519f26558044606997319  profiles/1.5Msun/midMS.FGONG.gz  [decompressed]
+2a3007d7f6934735e708c13047954f19  profiles/1.5Msun/SGB.FGONG.gz  [decompressed]
+59c64f2f0830a03a778aa9211b249c9f  profiles/1.5Msun/TAMS.FGONG.gz  [decompressed]
+569ef7ad1c10eab3ac6154b01127fbb3  profiles/1.5Msun/Xc0.10.FGONG.gz  [decompressed]
+4a0e4557b9ad17222bfd04809036c31e  profiles/1.5Msun/Xc0.20.FGONG.gz  [decompressed]
+8f4eeeaaac06b829de7710617a4ff160  profiles/1.5Msun/Xc0.30.FGONG.gz  [decompressed]
+0ff0d3bbf41b66143782ecfc113b2c4c  profiles/1.5Msun/Xc0.40.FGONG.gz  [decompressed]
+baa7e8da38042ff68f711da5f27bdf94  profiles/1.5Msun/Xc0.50.FGONG.gz  [decompressed]
+5afc9b2d1db9c43ca25cbd6ccfd6c4a6  profiles/1.5Msun/zams.FGONG.gz  [decompressed]
+78c31d9d1089e4d91fc951888a642cc2  profiles/2.0Msun/midMS.FGONG.gz  [decompressed]
+8d00cf974d528545511a2f35ac7fd45c  profiles/2.0Msun/SGB.FGONG.gz  [decompressed]
+2fc77b85d5e53a5db0cb6349791d947f  profiles/2.0Msun/TAMS.FGONG.gz  [decompressed]
+fd1ff40e04669906232faef60e2516aa  profiles/2.0Msun/Xc0.10.FGONG.gz  [decompressed]
+2aaab8c59fbce422b2ce2bcac71b6f98  profiles/2.0Msun/Xc0.20.FGONG.gz  [decompressed]
+fbd34f0a217125b043e3598a15fdfe30  profiles/2.0Msun/Xc0.30.FGONG.gz  [decompressed]
+cbf7a8c2f5d41b22797e640f42e58fca  profiles/2.0Msun/Xc0.40.FGONG.gz  [decompressed]
+9f968de20821fa940240d56b11979bb4  profiles/2.0Msun/Xc0.60.FGONG.gz  [decompressed]
+ffd8b645c73cc25ef734df24604eea84  profiles/2.0Msun/zams.FGONG.gz  [decompressed]
+7797c63637118285fed3bc6139dbb454  rgb/1.0Msun/tip.FGONG.gz  [decompressed]
+615d8c5875dab1db21c17db36972aea2  rgb/1.2Msun/tip.FGONG.gz  [decompressed]
+325d45f9a6850197df407ab076e63b01  rgb/1.5Msun/tip.FGONG.gz  [decompressed]
+0828b14d991c735bd338ec866b30c0a3  rgb/2.0Msun/tip.FGONG.gz  [decompressed]
+468a007083a2ead6815f2a4802da89a0  generate/extract_composition_profiles.sh
+65475027e054242fc95dc043d16f2aa1  generate/inlist_comparison
+0fd3f15318e5dfe5bdb471d7186ada53  generate/README.md
+96086497c352e8f8c09cddbc1930ee6a  generate/run_dense_resume.sh
+9df03561a18812284f334fee56ebc791  generate/run_dense.sh
+af9a9277a0688f806c8fb22516f22026  generate/run_rgb.sh
+65475027e054242fc95dc043d16f2aa1  inlist_1.0Msun
+d339c35c2005b7b7325198be3bb60a1d  inlist_1.2Msun
+4ede6e293e198519d2006132685e4511  inlist_1.5Msun
+9c22c7a57e2fb5319e439f9504c60271  inlist_2.0Msun
+0c6fae47f74cad3ec1125a09cfa08bb3  results/1.0Msun/history.data
+0c88bad6b77dc3ea83ddee1a76a93b85  results/1.2Msun/history.data
+115a5a6d0ac6248288aa9460df56abe8  results/1.5Msun/history.data
+b795248e6a6ce361a458f7bcb682f9e0  results/2.0Msun/history.data

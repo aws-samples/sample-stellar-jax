@@ -1,0 +1,25 @@
+# CI bundle test registry — tests grouped by per-mass MODE-A bundle (#1221).
+#
+# Each test listed here shares a session-scoped evolve_star(mass, **MESA_CONFIG,
+# max_steps=500) forward result with other tests requesting the same bundle_NpM
+# fixture. The CI orchestrator groups these tests into a SINGLE CI task per mass,
+# so evolve_star compiles once (~10-16 min XLA) and all downstream tests share
+# the compiled result.
+#
+# Format: one test name per line. The orchestrator detects the bundle fixture
+# from the test's signature (bundle_1p0, bundle_1p2, bundle_1p5, bundle_2p0,
+# or all_bundles → routes to all four mass tasks).
+#
+# Adding a test: migrate it to use a bundle_NpM fixture (see bundle_conftest.py),
+# then add it here. The test MUST use evolve_star(mass, max_steps=500, **MESA_CONFIG)
+# — same config as the bundle — and only read forward outputs.
+#
+# Mutation gate: under STELLAR_MUTATION, the bundle applies the mutation before
+# evolve_star runs (bundle_conftest._apply_mutation_if_set), so mutation-gated
+# tests correctly fail on corrupted bundle artifacts.
+
+# --- all_bundles (routed to all 4 mass tasks) ---
+test_mesa_comparison
+
+# --- bundle_2p0 ---
+test_cno_passive_model_adequate

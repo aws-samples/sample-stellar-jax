@@ -1,0 +1,56 @@
+! MESA r26.04.1 inlist for stellar-jax identical-physics comparison
+! Match our code's physics. Change initial_mass for each run.
+
+&star_job
+  create_pre_main_sequence_model = .true.
+  save_model_when_terminate = .true.
+  save_model_filename = 'final.mod'
+/
+
+&eos
+/
+
+&kap
+  Zbase = 0.014
+  kap_file_prefix = 'gs98'
+/
+
+&controls
+  ! Mass (change for each run: 1.0, 1.2, 1.5, 2.0)
+  initial_mass = 1.2
+
+  ! Composition
+  initial_z = 0.014
+  initial_y = 0.2695
+
+  ! MLT — Bohm-Vitense (Cox formulation)
+  MLT_option = 'Cox'
+  mixing_length_alpha = 2.0
+
+  ! Nuclear network — PP + CNO only
+  default_net_name = 'pp_cno_extras_o18_ne22.net'
+
+  ! Atmosphere — Krishna Swamy T(tau)
+  atm_option = 'T_tau'
+  atm_T_tau_relation = 'Krishna_Swamy'
+  atm_T_tau_opacity = 'varying'
+
+  ! Disable diffusion
+  do_element_diffusion = .false.
+
+  ! Overshooting already off by default (overshoot_scheme(:) = '')
+  ! Rotation already off by default (new_rotation_flag = .false.)
+
+  ! Stop at TAMS
+  xa_central_lower_limit_species(1) = 'h1'
+  xa_central_lower_limit(1) = 0.01
+
+  ! Output
+  history_interval = 5
+  profile_interval = 50
+  max_num_profile_models = 100
+/
+
+&pgstar
+  pgstar_flag = .false.
+/

@@ -1,0 +1,52 @@
+name: Research task
+description: An autonomous research/experiment investigation (runs on a never-merge branch; records conclusions to docs/research/ + issue comments; you close it manually).
+title: "[Research] "
+labels: ["research"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        A **research** issue is exploratory: the agent forms hypotheses, runs probes, and records
+        MEASURED results + an evidence-backed conclusion. It works on a `research-<N>-<slug>` branch
+        that **never merges**, writes findings to `docs/research/<topic>.md` **and** posts a summary
+        comment here, then applies **`research-complete`**. **You close the issue manually** after
+        reviewing (so nothing slips off the radar).
+
+        **Compute:** add a `size/*` label to pick the container tier — `size/light` (1 vCPU/8 GB),
+        `size/heavy` (4/24, default), `size/huge` (8/60), `size/mega` (16/120 — heavy `evolve_star`
+        gradient/seismic probes). No `size/*` label ⇒ default `heavy`.
+  - type: textarea
+    id: question
+    attributes:
+      label: Research question / hypothesis
+      description: What are we testing, and what would a clear answer look like?
+      placeholder: "e.g. Does an analytic block Jacobian (flag ANALYTIC_JAC) cut jax.grad(evolve_star) peak below 24.5 GB with an identical gradient?"
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why it matters / what it unblocks
+    validations:
+      required: true
+  - type: textarea
+    id: method
+    attributes:
+      label: Method / probes to run
+      description: Suggested experiments, branches, test filters, A/B controls. The agent may refine.
+    validations:
+      required: true
+  - type: textarea
+    id: done
+    attributes:
+      label: Done condition (success criteria)
+      description: What measured result(s) settle this? Include the "refuted" outcome as valid.
+    validations:
+      required: true
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Constraints / notes
+      description: Budget/time limits, must-not-touch areas, known pitfalls (e.g. full-40-char-sha DDB PK).
+    validations:
+      required: false

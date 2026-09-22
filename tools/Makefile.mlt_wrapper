@@ -1,0 +1,61 @@
+# Build ALL MESA wrapper shared libraries (bind(C) shims).
+#
+# Requires MESA_DIR pointing to a MESA installation built with USE_SHARED=yes.
+# Each lib*_wrapper.so is a thin C-callable shim around the corresponding MESA module.
+#
+# Usage:
+#   make -f Makefile.mlt_wrapper MESA_DIR=/cache/mesa_libs   (builds all 5)
+#   make -f Makefile.mlt_wrapper clean
+
+MESA_DIR ?= /cache/mesa_libs
+FC       ?= gfortran
+FFLAGS   := -shared -fPIC -O2
+
+MESA_INC := $(MESA_DIR)/include
+MESA_LIB := $(MESA_DIR)/lib
+MESA_SDK_LIB := $(MESA_DIR)/sdk_lib
+
+# Source / output directory
+SRC_DIR := microphysics/mesa
+OUT_DIR := microphysics/mesa
+
+# --- Per-wrapper library dependencies (order matters for link resolution) ---
+# MLT: needs turb + auto_diff
+MLT_LIBS := -lturb -lauto_diff -lconst -lutils -lmath -lnum
+# EOS: needs eos
+EOS_LIBS := -leos -lchem -lconst -lmath -lutils -lnum -lauto_diff
+# KAP: needs kap
+KAP_LIBS := -lkap -lchem -lconst -lmath -lutils -lnum -lauto_diff
+# NEU: needs neu
+NEU_LIBS := -lneu -lchem -lconst -lmath -lutils -lnum -lauto_diff
+# NET: needs net + rates
+NET_LIBS := -lnet -lrates -lchem -lconst -lmath -lutils -lnum -lauto_diff
+
+# All targets
+ALL_LIBS := $(OUT_DIR)/libmlt_wrapper.so \
+            $(OUT_DIR)/libeos_wrapper.so \
+            $(OUT_DIR)/libkap_wrapper.so \
+            $(OUT_DIR)/libneu_wrapper.so \
+            $(OUT_DIR)/libnet_wrapper.so
+
+.PHONY: all clean
+
+all: $(ALL_LIBS)
+
+$(OUT_DIR)/libmlt_wrapper.so: $(SRC_DIR)/mlt_wrapper.f90
+	$(FC) $(FFLAGS) -o $@ $< -I$(MESA_INC) -L$(MESA_LIB) -L$(MESA_SDK_LIB) $(MLT_LIBS)
+
+$(OUT_DIR)/libeos_wrapper.so: $(SRC_DIR)/eos_wrapper.f90
+	$(FC) $(FFLAGS) -o $@ $< -I$(MESA_INC) -L$(MESA_LIB) -L$(MESA_SDK_LIB) $(EOS_LIBS)
+
+$(OUT_DIR)/libkap_wrapper.so: $(SRC_DIR)/kap_wrapper.f90
+	$(FC) $(FFLAGS) -o $@ $< -I$(MESA_INC) -L$(MESA_LIB) -L$(MESA_SDK_LIB) $(KAP_LIBS)
+
+$(OUT_DIR)/libneu_wrapper.so: $(SRC_DIR)/neu_wrapper.f90
+	$(FC) $(FFLAGS) -o $@ $< -I$(MESA_INC) -L$(MESA_LIB) -L$(MESA_SDK_LIB) $(NEU_LIBS)
+
+$(OUT_DIR)/libnet_wrapper.so: $(SRC_DIR)/net_wrapper.f90
+	$(FC) $(FFLAGS) -o $@ $< -I$(MESA_INC) -L$(MESA_LIB) -L$(MESA_SDK_LIB) $(NET_LIBS)
+
+clean:
+	rm -f $(ALL_LIBS)

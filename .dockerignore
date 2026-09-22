@@ -1,0 +1,11 @@
+# Docker build-context excludes (context = repo root; see demos/Dockerfile).
+# Keep src/stellar_jax/data (baked into the image) — do NOT exclude it.
+.git
+.github
+**/__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+.DS_Store

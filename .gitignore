@@ -1,0 +1,27 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+*.egg-info/
+dist/
+build/
+.DS_Store
+*.swp
+*.swo
+infra/serverless/lambda/.aws-sam/
+infra/serverless/lambda/bin/
+infra/serverless/lambda/*.so
+infra/serverless/lambda/*dist-info/
+data/data
+core.*
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Release output (generated at runtime)
+tests/release_charts/
+tests/release_metrics.json
+docs/releases/*/release_notes.pdf
+docs/releases/*/release_notes.html
+docs/releases/*/metrics.json
+docs/releases/*/*.png

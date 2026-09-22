@@ -1,0 +1,89 @@
+name: Physics / code task
+description: A stellar-jax task. Fill the brief — it becomes the agent's working context (body + comments are fetched at runtime).
+title: "<concise imperative title>"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This brief is read directly by the autonomous agent. A focused, specific brief
+        (symptom → suspected location → constraints → acceptance test) is what lets it
+        diagnose before editing instead of flailing. Be concrete.
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: "Also add the matching label (P0-critical / P1-high / P2-low) — the orchestrator schedules by label."
+      options:
+        - P0-critical
+        - P1-high
+        - P2-low
+    validations:
+      required: true
+
+  - type: textarea
+    id: symptom
+    attributes:
+      label: Symptom — observed vs expected
+      description: What is wrong, concretely? Include the failing test / number / error AND what it should be.
+      placeholder: "e.g. test_gradient_alpha asserts dlogTeff/dlogα > 0, but evolve_star gives -0.03 at 1 Msun."
+    validations:
+      required: true
+
+  - type: textarea
+    id: location
+    attributes:
+      label: Suspected location (files / functions / lines)
+      description: Where in the code do you think the cause lives? Point the agent at the right place.
+      placeholder: "e.g. mlt_nabla (~stellar.py:268), atmosphere_bc SAL block (~stellar.py:920-954)."
+    validations:
+      required: false
+
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Constraints / quality bar
+      description: Hard rules the solution must respect.
+      value: |
+        - Physics-first: NO fudge factors / calibrated constants / output patches. The effect must emerge from the equations.
+        - One code path (no fast-approximate vs slow-correct split).
+        - Differentiable (gradients must flow; avoid non-smooth ops on the gradient path).
+        - Cite a paper / textbook / public code for every constant or scaling.
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria + test (write-test-first)
+      description: The concrete, testable condition(s) and the test in tests/ that must pass.
+      placeholder: "e.g. add test_alpha_sensitivity_solar_sign_and_magnitude: dlogTeff/dlogα in (0.03,0.15) and > 0 at 1 Msun, Z=0.014."
+    validations:
+      required: true
+
+  - type: textarea
+    id: decomposition
+    attributes:
+      label: Suggested decomposition (optional)
+      description: If large, list bounded sub-steps. Smaller scopes thrash less and review easier.
+    validations:
+      required: false
+
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies
+      description: "List blockers, one per line, EXACTLY as 'Blocked by #N' (the orchestrator parses this to gate scheduling)."
+      placeholder: |
+        Blocked by #26
+        Blocked by #14
+    validations:
+      required: false
+
+  - type: textarea
+    id: references
+    attributes:
+      label: References
+      description: Papers / textbooks / MESA modules supporting the approach.
+    validations:
+      required: false

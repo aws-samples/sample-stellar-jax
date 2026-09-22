@@ -1,0 +1,47 @@
+! Pinned MESA inlist for the RGB reference tracks (F5 / issue #159).
+!
+! Identical-physics MODE A: alpha_MLT=2.0 (Cox), Z=0.014, Y=0.2695, gs98,
+! Krishna-Swamy T(tau), NO diffusion / overshoot / rotation. Evolved from a
+! pre-main-sequence model to the tip of the RGB (pre-He-flash), terminated by
+! power_he_burn_upper_limit.
+!
+! `initial_mass` is the swept parameter: one run each for 1.0, 1.2, 1.5, 2.0.
+! `save_model_filename` was set to final_<M>.mod per run. Generated with
+! MESA f12c70cf. See README.md for the reproduce recipe.
+
+&star_job
+  show_log_description_at_start = .false.
+  create_pre_main_sequence_model = .true.
+  save_model_when_terminate = .true.
+  save_model_filename = 'final.mod'   ! per-run: final_<M>.mod
+/
+
+&eos
+/
+
+&kap
+  Zbase = 0.014
+  kap_file_prefix = 'gs98'
+/
+
+&controls
+  initial_mass = 1.0                  ! SWEPT: 1.0, 1.2, 1.5, 2.0
+  initial_z = 0.014
+  initial_y = 0.2695
+  MLT_option = 'Cox'
+  mixing_length_alpha = 2.0
+  default_net_name = 'pp_cno_extras_o18_ne22.net'
+  atm_option = 'T_tau'
+  atm_T_tau_relation = 'Krishna_Swamy'
+  atm_T_tau_opacity = 'varying'
+  do_element_diffusion = .false.
+  power_he_burn_upper_limit = 1d3     ! terminate at the RGB tip, pre-flash
+  max_model_number = 30000
+  varcontrol_target = 1d-3
+  history_interval = 1
+  profile_interval = 50
+  max_num_profile_models = 400
+  write_pulse_data_with_profile = .true.
+  pulse_data_format = 'FGONG'
+  add_atmosphere_to_pulse_data = .true.
+/
